@@ -6,6 +6,8 @@ import './index.css';
 import Home from './pages/Home/Home.jsx';
 import AddBook from './pages/AddBook/AddBook.jsx';
 import EditBook from './pages/EditBook/EditBook.jsx';
+import { Provider } from 'react-redux';
+import store from './app/store.js';
 
 const routes = createBrowserRouter([
 	{
@@ -30,6 +32,8 @@ const routes = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
-		<RouterProvider router={routes} />
+		<Provider store={store}>
+			<RouterProvider router={routes} />
+		</Provider>
 	</React.StrictMode>
 );
