@@ -1,6 +1,34 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAddBookMutation } from '../../../features/api/apiSlice';
+
 export default function Form() {
-    return (
-		<form className='book-form'>
+	// ! Required hooks and variables
+	const [addBook, { isSuccess }] = useAddBookMutation();
+
+	const navigate = useNavigate();
+	const [bookDetails, setBookDetails] = useState({
+		name: '',
+		author: '',
+		thumbnail: '',
+		price: '',
+		rating: '',
+		featured: false,
+	});
+
+	const handleAddBook = (e) => {
+		e.preventDefault();
+
+		addBook(bookDetails);
+	};
+
+	if (isSuccess) {
+		navigate('/');
+		alert('Success');
+	}
+
+	return (
+		<form className='book-form' onSubmit={handleAddBook}>
 			<div className='space-y-2'>
 				<label htmlFor='lws-bookName'>Book Name</label>
 				<input
@@ -9,6 +37,10 @@ export default function Form() {
 					type='text'
 					id='lws-bookName'
 					name='name'
+					value={bookDetails.name}
+					onChange={(e) =>
+						setBookDetails({ ...bookDetails, name: e.target.value })
+					}
 				/>
 			</div>
 
@@ -20,6 +52,13 @@ export default function Form() {
 					type='text'
 					id='lws-author'
 					name='author'
+					value={bookDetails.author}
+					onChange={(e) =>
+						setBookDetails({
+							...bookDetails,
+							author: e.target.value,
+						})
+					}
 				/>
 			</div>
 
@@ -31,6 +70,13 @@ export default function Form() {
 					type='text'
 					id='lws-thumbnail'
 					name='thumbnail'
+					value={bookDetails.thumbnail}
+					onChange={(e) =>
+						setBookDetails({
+							...bookDetails,
+							thumbnail: e.target.value,
+						})
+					}
 				/>
 			</div>
 
@@ -43,6 +89,13 @@ export default function Form() {
 						type='number'
 						id='lws-price'
 						name='price'
+						value={bookDetails.price}
+						onChange={(e) =>
+							setBookDetails({
+								...bookDetails,
+								price: parseInt(e.target.value),
+							})
+						}
 					/>
 				</div>
 
@@ -66,6 +119,13 @@ export default function Form() {
 					type='checkbox'
 					name='featured'
 					className='w-4 h-4'
+					checked={bookDetails.featured}
+					onChange={(e) =>
+						setBookDetails({
+							...bookDetails,
+							featured: e.target.value ? true : false,
+						})
+					}
 				/>
 				<label htmlFor='lws-featured' className='ml-2 text-sm'>
 					{' '}
@@ -73,7 +133,10 @@ export default function Form() {
 				</label>
 			</div>
 
-			<button type='submit' className='submit' id='lws-submit'>
+			<button
+				type='submit'
+				className='w-full py-2 border-2 border-gray-300 text-slate-400 font-semibold rounded duration-300 hover:bg-blue-400 hover:text-white hover:border-blue-400'
+				id='lws-submit'>
 				Add Book
 			</button>
 		</form>

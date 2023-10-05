@@ -1,6 +1,6 @@
 export default function Book({ book }) {
 	// ! Required variables
-	const { id, name, author, thumbnail, price, rating, featured } = book;
+	const { id, name, author, thumbnail, price, rating, featured } = book;	
 
 	return (
 		<div className='book-card'>
