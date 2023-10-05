@@ -5,6 +5,7 @@ import App from './App.jsx';
 import './index.css';
 import Home from './pages/Home/Home.jsx';
 import AddBook from './pages/AddBook/AddBook.jsx';
+import EditBook from './pages/EditBook/EditBook.jsx';
 
 const routes = createBrowserRouter([
 	{
@@ -18,6 +19,10 @@ const routes = createBrowserRouter([
 			{
 				path: '/addBook',
 				element: <AddBook />,
+			},
+			{
+				path: '/editBook',
+				element: <EditBook />,
 			},
 		],
 	},
