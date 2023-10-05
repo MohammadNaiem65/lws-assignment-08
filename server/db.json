@@ -26,15 +26,6 @@
       "rating": 5,
       "featured": false,
       "id": 4
-    },
-    {
-      "name": "JavaScript: The Good Parts",
-      "author": "Douglas Crockford",
-      "thumbnail": "https://books.google.com.bd/books/content?id=PXa2bby0oQ0C&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE72b1Cp88DefkEfPle_y7As-A68Qn8Mae2S0UTWhbn2u9X8Iy8rVBCvT2Hq9s8nV7EfpLaIqJsuJwxebhILSJER9vKwWr0a1q5sdFxUPBIq_p0vHFLa1XSAZ3kwsFtyOiJTc3puP",
-      "price": 45,
-      "rating": 5,
-      "featured": true,
-      "id": 6
     }
   ]
 }

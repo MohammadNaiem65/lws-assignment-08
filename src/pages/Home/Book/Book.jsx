@@ -1,8 +1,21 @@
 import { Link } from 'react-router-dom';
+import { useDeleteBookMutation } from '../../../features/api/apiSlice';
+import { useEffect } from 'react';
 
 export default function Book({ book }) {
 	// ! Required variables
 	const { id, name, author, thumbnail, price, rating, featured } = book;
+	const [deleteBook, { isSuccess }] = useDeleteBookMutation();
+
+	const handleDeleteBook = () => {
+		deleteBook(id);
+	};
+
+	useEffect(() => {
+		if (isSuccess) {
+			alert('Successfully deleted!');
+		}
+	}, [isSuccess]);
 
 	return (
 		<div className='book-card'>
@@ -29,7 +42,9 @@ export default function Book({ book }) {
 								/>
 							</svg>
 						</Link>
-						<button className='lws-deleteBook'>
+						<button
+							className='lws-deleteBook'
+							onClick={handleDeleteBook}>
 							<svg
 								fill='none'
 								viewBox='0 0 24 24'
