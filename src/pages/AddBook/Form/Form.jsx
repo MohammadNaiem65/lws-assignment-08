@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAddBookMutation } from '../../../features/api/apiSlice';
 
@@ -22,10 +22,11 @@ export default function Form() {
 		addBook(bookDetails);
 	};
 
-	if (isSuccess) {
-		navigate('/');
-		alert('Success');
-	}
+	useEffect(() => {
+		if (isSuccess) {
+			navigate('/');
+		}
+	}, [isSuccess, navigate]);
 
 	return (
 		<form className='book-form' onSubmit={handleAddBook}>
@@ -109,6 +110,13 @@ export default function Form() {
 						name='rating'
 						min='1'
 						max='5'
+						value={bookDetails.rating}
+						onChange={(e) =>
+							setBookDetails({
+								...bookDetails,
+								rating: parseInt(e.target.value),
+							})
+						}
 					/>
 				</div>
 			</div>
@@ -123,7 +131,7 @@ export default function Form() {
 					onChange={(e) =>
 						setBookDetails({
 							...bookDetails,
-							featured: e.target.value ? true : false,
+							featured: e.target.checked,
 						})
 					}
 				/>

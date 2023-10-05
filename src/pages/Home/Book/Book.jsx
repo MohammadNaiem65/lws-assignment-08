@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
+
 export default function Book({ book }) {
 	// ! Required variables
-	const { id, name, author, thumbnail, price, rating, featured } = book;	
+	const { id, name, author, thumbnail, price, rating, featured } = book;
 
 	return (
 		<div className='book-card'>
@@ -12,8 +14,8 @@ export default function Book({ book }) {
 			<div className='flex-1 h-full pr-2 pt-2 flex flex-col'>
 				<div className='flex items-center justify-between'>
 					{featured && <span className='lws-badge'>featured</span>}
-					<div className='text-gray-500 space-x-2 ml-auto'>
-						<button className='lws-edit '>
+					<div className='text-gray-500 space-x-2 ml-auto flex'>
+						<Link to={`/editBook/${id}`} className='lws-edit '>
 							<svg
 								fill='none'
 								viewBox='0 0 24 24'
@@ -26,7 +28,7 @@ export default function Book({ book }) {
 									d='M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10'
 								/>
 							</svg>
-						</button>
+						</Link>
 						<button className='lws-deleteBook'>
 							<svg
 								fill='none'
