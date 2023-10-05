@@ -1,8 +1,11 @@
+import { useSelector } from 'react-redux';
+import { matchSorter } from 'match-sorter';
 import { useGetBooksQuery } from '../../../features/api/apiSlice';
 import Book from '../Book/Book';
 
 export default function Books() {
 	// ! Required hooks and variables
+	const { keyword, type } = useSelector((state) => state.filters);
 	const { data: books, isLoading, isSuccess } = useGetBooksQuery();
 
 	// decide what to render
@@ -10,7 +13,20 @@ export default function Books() {
 	if (isLoading) {
 		content = <div className='text-center text-lg'>Loading...</div>;
 	} else if (!isLoading && isSuccess) {
-		content = books.map((book) => <Book key={book.id} book={book} />);
+		// filter books
+		const filteredBooks = matchSorter(books, keyword, {
+			keys: ['name'],
+		}).filter((book) => {
+			if (type === 'All') {
+				return true;
+			} else if (type === 'Featured' && book.featured) {
+				return true;
+			}
+		});
+
+		content = filteredBooks.map((book) => (
+			<Book key={book.id} book={book} />
+		));
 	}
 
 	return (
