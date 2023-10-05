@@ -1,5 +1,17 @@
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { filterByKeyword } from '../../../features/filter/filterSlice';
+
 export default function FilterForm() {
-    return (
+	// ! Required state
+	const dispatch = useDispatch();
+	const [keyword, setKeyword] = useState('');
+
+	useEffect(() => {
+		dispatch(filterByKeyword(keyword));
+	}, [dispatch, keyword]);
+
+	return (
 		<form className='flex items-center'>
 			<div className='group relative rounded-md bg-white'>
 				<svg
@@ -17,6 +29,8 @@ export default function FilterForm() {
 					placeholder='Filter books...'
 					className='search'
 					id='lws-search'
+					value={keyword}
+					onChange={(e) => setKeyword(e.target.value)}
 				/>
 			</div>
 		</form>
